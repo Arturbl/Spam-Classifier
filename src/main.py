@@ -12,7 +12,7 @@ TOKEN_COUNTER = {}
 
 # get dataframe
 def get_data_frame():
-    csv_path = "/home/artur/Desktop/Spam_Classifier/src/utils/spam.csv"
+    csv_path = "utils/spam.csv"
     return pd.read_csv(csv_path, encoding='ISO-8859-1')
 
 
