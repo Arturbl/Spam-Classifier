@@ -6,6 +6,8 @@ from nltk.corpus import stopwords
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 
+
+THRESHOLD = 100
 STOP_WORDS = stopwords.words("english")  # get regular words that can be ignored for example (it, from, to, how)
 TOKEN_COUNTER = {}
 
@@ -64,7 +66,7 @@ def message_to_count_vector(message):
     return count_vector
 
 
-def df_to_X_y(data_frame):
+def generate_results(data_frame):
     y = [i for i in data_frame['v1']]  # [0 if i == 'ham' else 1 for i in data_frame['v1']]
     message_col = data_frame["v2"]
     count_vectors = []
@@ -88,15 +90,15 @@ generate_token_counter(train_df)
 
 bag_of_words = set()  # bag of words, we use sets because sets cant have duplicates
 for token in TOKEN_COUNTER:
-    if keep_token(token, 100):
+    if keep_token(token, THRESHOLD):
         bag_of_words.add(token)
 bag_of_words = list(bag_of_words)
 
 # create a map with the bag of words (features) and give an index to each one
 token_to_index_mapping = {t: i for t, i in zip(bag_of_words, range(len(bag_of_words)))}
 
-x_train, y_train = df_to_X_y(train_df)
-x_test, y_test = df_to_X_y(test_df)
+x_train, y_train = generate_results(train_df)
+x_test, y_test = generate_results(test_df)
 
 lr = LogisticRegression().fit(x_train, y_train)
 print(classification_report(y_test, lr.predict(x_test)))
