@@ -83,6 +83,7 @@ df = get_data_frame()
 split_index = int(len(df) * 0.7)  # the first 70% is for train and the last 30 is for test
 train_df, test_df = df[:split_index], df[split_index:]
 
+
 generate_token_counter(train_df)
 
 bag_of_words = set()  # bag of words, we use sets because sets cant have duplicates
