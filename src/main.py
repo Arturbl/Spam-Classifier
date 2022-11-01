@@ -47,11 +47,11 @@ def generate_token_counter(train_df):
 # keep_token("euro", 10) -> return false because the token "euro" does not appear more than 10 times
 # processed_token -> each token in token_counter
 # threshold > positive integer
-def keep_token(processed_token, threshold):
+def keep_token(processed_token):
     if processed_token not in TOKEN_COUNTER:
         return False
     else:
-        return TOKEN_COUNTER[processed_token] > threshold
+        return TOKEN_COUNTER[processed_token] > THRESHOLD
 
 
 # create vector and count appearences of tokens in a single message/email
@@ -90,11 +90,11 @@ generate_token_counter(train_df)
 
 bag_of_words = set()  # bag of words, we use sets because sets cant have duplicates
 for token in TOKEN_COUNTER:
-    if keep_token(token, THRESHOLD):
+    if keep_token(token):
         bag_of_words.add(token)
 bag_of_words = list(bag_of_words)
 
-# create a map with the bag of words (features) and give an index to each one
+# create a map with the bag of words and give an index to each one
 token_to_index_mapping = {t: i for t, i in zip(bag_of_words, range(len(bag_of_words)))}
 
 x_train, y_train = generate_results(train_df)
