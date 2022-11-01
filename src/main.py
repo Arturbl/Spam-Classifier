@@ -24,7 +24,7 @@ def get_data_frame():
 # test_message_tokenized = tokenizer.tokenize(test_message)
 # test_message_tokenized = ['Hey','GGggGG','feet','it','going','HTML','bads','bads','randoms','badly']
 def message_to_token_list(message):
-    tokenizer = nltk.RegexpTokenizer(r"\w+")
+    tokenizer = nltk.RegexpTokenizer(r"\w+") # A tokenizer that splits a string using a regular expression
     tokens = tokenizer.tokenize(message)
     lowercased_tokens = [t.lower() for t in tokens]
     lemmatized_tokens = [WordNetLemmatizer().lemmatize(t) for t in lowercased_tokens]
