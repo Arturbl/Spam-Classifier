@@ -33,7 +33,7 @@ def message_to_token_list(message):
 
 
 # check how many times each token appears in the csv file and store them into a map
-def generate_token_counter(train_df):
+def generate_vocabulary(train_df):
     for message in train_df["v2"]:
         message_as_token_lst = message_to_token_list(message)
         for token in message_as_token_lst:
@@ -86,7 +86,7 @@ split_index = int(len(df) * 0.7)  # the first 70% is for train and the last 30 i
 train_df, test_df = df[:split_index], df[split_index:]
 
 
-generate_token_counter(train_df)
+generate_vocabulary(train_df)
 
 bag_of_words = set()  # bag of words, we use sets because sets cant have duplicates
 for token in TOKEN_COUNTER:
