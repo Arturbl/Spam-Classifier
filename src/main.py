@@ -24,7 +24,7 @@ def get_data_frame():
 # test_message_tokenized = tokenizer.tokenize(test_message)
 # test_message_tokenized = ['Hey','GGggGG','feet','it','going','HTML','bads','bads','randoms','badly']
 def message_to_token_list(message):
-    tokenizer = nltk.RegexpTokenizer(r"\w+") # A tokenizer that splits a string using a regular expression
+    tokenizer = nltk.RegexpTokenizer(r"\w+")  # A tokenizer that splits a string using a regular expression
     tokens = tokenizer.tokenize(message)
     lowercased_tokens = [t.lower() for t in tokens]
     lemmatized_tokens = [WordNetLemmatizer().lemmatize(t) for t in lowercased_tokens]
@@ -95,7 +95,7 @@ for token in TOKEN_COUNTER:
 bag_of_words = list(bag_of_words)
 
 # create a map with the bag of words and give an index to each one
-token_to_index_mapping = {t: i for t, i in zip(bag_of_words, range(len(bag_of_words)))}
+token_to_index_mapping = {t:i for t, i in zip(bag_of_words, range(len(bag_of_words)))}
 
 x_train, y_train = generate_results(train_df)
 x_test, y_test = generate_results(test_df)
